@@ -1,0 +1,36 @@
+# OSX
+.DS_Store
+
+# library
+library/
+# android generated
+bin/
+gen/
+
+local.properties
+project.properties
+
+# IDEA
+.idea/
+*.iml
+out/
+
+# gradle
+build/
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+gradle.properties
+settings.gradle
+
+# build
+/build
+lint.xml
+lint.html
+app/lint-report.html
+proguard-rules.txt
+
+# test
+test.html
+ajcore.*
