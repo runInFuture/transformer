@@ -1,0 +1,30 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+def pluginGroupId = 'com.wuyi'
+def pluginArtifactId = 'transformer'
+def pluginVersion = '0.0.1'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation gradleApi()
+}
+
+compileGroovy {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    options.encoding = "UTF-8"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = pluginGroupId
+            artifactId = pluginArtifactId
+            version = pluginVersion
+
+            from components.java
+        }
+    }
+}

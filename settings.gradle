@@ -1,2 +1,2 @@
-include ':demo', ':transformer', ':annotation'
+include ':demo', ':transformer', ':annotation', ':plugin'
 rootProject.name='Transformer'
