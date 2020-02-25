@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'comm'
+apply plugin: 'com.wuyi.transformer'
 
 android {
     compileSdkVersion 28
@@ -28,4 +28,9 @@ dependencies {
 
     implementation project(':annotation')
     implementation project(':transformer')
+}
+
+
+transformer {
+    loggable = false
 }

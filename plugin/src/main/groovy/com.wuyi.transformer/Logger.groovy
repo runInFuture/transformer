@@ -1,11 +1,15 @@
 package com.wuyi.transformer
 
 class Logger {
-    boolean loggale = true
+    Closure<Boolean> switcher
+
+    Logger(Closure<Boolean> switcher) {
+        this.switcher = switcher
+    }
 
     void log(String msg) {
-        if (loggale) {
-            print msg
+        if (switcher.call()) {
+            println msg
         }
     }
 }
