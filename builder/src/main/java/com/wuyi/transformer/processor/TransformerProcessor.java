@@ -1,6 +1,9 @@
 package com.wuyi.transformer.processor;
 
+import com.wuyi.transformer.ClassFile;
 import com.wuyi.transformer.FileFinder;
+import com.wuyi.transformer.T;
+import com.wuyi.transformer.Transformer;
 import com.wuyi.transformer.Util;
 import com.wuyi.transformer.annotation.Layout;
 import com.wuyi.transformer.log.AdapterLogger;
@@ -52,7 +55,7 @@ public class TransformerProcessor extends AbstractProcessor {
                 Layout layout = element.getAnnotation(Layout.class);
                 if (layout != null) {
                     int layoutId = layout.value();
-                    adapterLogger.info("process layoutId: " + layoutId);
+                    adapterLogger.info("process layoutId: " + Integer.toHexString(layoutId));
                     processLayout(layoutId);
                 }
             }
@@ -63,7 +66,9 @@ public class TransformerProcessor extends AbstractProcessor {
         if (!processedLayouts.contains(layoutId)) {
             File layoutXmlFile = FileFinder.layout(layoutId);
             if (layoutXmlFile != null) {
-                // read
+                Transformer transformer = new T();
+                ClassFile classFile = transformer.transform(layoutXmlFile);
+                classFile.writeToFile();
             }
             processedLayouts.add(layoutId);
         }

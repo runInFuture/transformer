@@ -1,5 +1,8 @@
 package com.wuyi.transformer
 
+import com.android.build.gradle.LibraryPlugin
+import com.android.build.gradle.api.BaseVariant
+import com.android.build.gradle.tasks.ProcessAndroidResources
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -11,13 +14,27 @@ import org.gradle.api.Project
 class TransformerPlugin implements Plugin<Project> {
     Logger logger
 
+    // fixme
     @Override
     void apply(Project project) {
         // the entrance of plugin
         Config config = project.extensions.create("transformer", Config)
         logger = new Logger({ config.loggable })
 
-        LayoutViewTask layoutViewTask = new LayoutViewTask()
-        project.tasks.add(layoutViewTask.name(), layoutViewTask)
+//        LayoutViewTask layoutViewTask = new LayoutViewTask()
+//        project.tasks.add(layoutViewTask.name(), layoutViewTask)
+
+        def variants = project.plugins.hasPlugin(LibraryPlugin) ?
+                project.android.libraryVariants : project.android.applicationVariants
+        logger.log("==================" + variants)
+        project.afterEvaluate {
+            variants.all { BaseVariant variant ->
+                String varName = variant.name.capitalize()
+                ProcessAndroidResources processResourcesTask =
+                        project.tasks.findByName("process${varName}Resources")
+                logger.log("==================" + variant)
+//                println "==================" + processResourcesTask.sourceOutputDir.path
+            }
+        }
     }
 }

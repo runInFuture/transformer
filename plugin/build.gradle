@@ -9,6 +9,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation gradleApi()
+    // for access AGP api
+    implementation 'com.android.tools.build:gradle:3.5.3'
 }
 
 compileGroovy {

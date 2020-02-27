@@ -1,9 +1,18 @@
 apply plugin: 'java-library'
+apply plugin: 'idea'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':annotation')
+    implementation 'com.squareup:javapoet:1.12.1'
 }
 
 sourceCompatibility = "7"
