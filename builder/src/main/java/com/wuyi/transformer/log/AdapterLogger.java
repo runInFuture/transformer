@@ -4,11 +4,23 @@ import javax.annotation.processing.Messager;
 import javax.tools.Diagnostic;
 
 public class AdapterLogger implements Logger {
-    private final Messager delegate;
+    private Messager delegate;
     private int logLevel = LEVEL_DEBUG;
+
+    private static class SingletonHolder {
+        private static AdapterLogger instance = new AdapterLogger(null);
+    }
+
+    public static AdapterLogger getInstance() {
+        return SingletonHolder.instance;
+    }
 
     public AdapterLogger(Messager messager) {
         delegate = messager;
+    }
+
+    public void inject(Messager messager) {
+        this.delegate = messager;
     }
 
     @Override

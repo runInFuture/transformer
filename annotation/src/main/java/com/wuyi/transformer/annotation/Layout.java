@@ -12,5 +12,5 @@ public @interface Layout {
      * define xml layout id. Required.
      * @return xml layout id
      */
-    int id();
+    int value();
 }

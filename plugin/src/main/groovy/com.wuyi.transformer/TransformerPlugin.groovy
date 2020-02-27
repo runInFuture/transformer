@@ -16,10 +16,8 @@ class TransformerPlugin implements Plugin<Project> {
         // the entrance of plugin
         Config config = project.extensions.create("transformer", Config)
         logger = new Logger({ config.loggable })
-        work()
-    }
 
-    void work() {
-
+        LayoutViewTask layoutViewTask = new LayoutViewTask()
+        project.tasks.add(layoutViewTask.name(), layoutViewTask)
     }
 }
